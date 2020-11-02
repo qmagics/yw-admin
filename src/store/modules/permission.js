@@ -19,14 +19,14 @@ function hasPermission(roles, route) {
  * @param roles
  */
 export function filterAsyncRoutes(routes, roles, parent) {
-  const res = [];
+  const res = []
 
   routes.forEach(route => {
-    const tmp = { ...route };
+    const tmp = { ...route }
 
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles, tmp);
+        tmp.children = filterAsyncRoutes(tmp.children, roles, tmp)
       }
 
       // if(tmp.juhe){
@@ -65,7 +65,7 @@ const actions = {
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })
-  },
+  }
 
   // /**
   //  * 根据完整路由地址获取父级路由对象

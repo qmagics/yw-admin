@@ -73,7 +73,6 @@ const actions = {
     //   return;
     // }
 
-
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },

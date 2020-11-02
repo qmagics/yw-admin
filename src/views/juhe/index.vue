@@ -11,23 +11,23 @@
           active-text-color="#ffd04b"
         >
           <el-menu-item
+            v-for="i in menuRoutes"
+            :key="i.meta.fullPath"
             :class="{
               active: i.path === $route,
             }"
             :index="i.meta.fullPath"
-            :key="i.meta.fullPath"
-            v-for="i in menuRoutes"
             :route="i"
           >
-            <i :class="i.meta.icon"></i>
+            <i :class="i.meta.icon" />
             <span slot="title">{{ i.meta.title }}</span>
             <!-- <span slot="title">{{ i.meta.fullPath }}</span> -->
           </el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="21" style="padding-left: 15px">
-          <pre>activeMenu:{{activeMenu}}</pre>
-        <router-view></router-view>
+        <pre>activeMenu:{{ activeMenu }}</pre>
+        <router-view />
       </el-col>
     </el-row>
     <!-- <pre>{{ menuRoutes }}</pre> -->
@@ -35,33 +35,33 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
-    return {};
+    return {}
   },
 
   computed: {
     activeMenu() {
-      const route = this.$route;
-      const { meta, path } = route;
+      const route = this.$route
+      const { meta, path } = route
       if (meta.activeMenu) {
-        return meta.activeMenu;
+        return meta.activeMenu
       }
-      return path;
+      return path
     },
-    ...mapGetters(["permission_routes"]),
+    ...mapGetters(['permission_routes']),
     menuRoutes() {
       return this.$store.getters.getParentRouteByFullPath(this.$route.path)
-        .children;
-    },
+        .children
+    }
   },
 
-  methods: {},
-
   async mounted() {},
-};
+
+  methods: {}
+}
 </script>
 
 <style lang="scss">

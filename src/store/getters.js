@@ -18,27 +18,27 @@ const getters = {
  */
   getParentRouteByFullPath: (state) => (fullPath) => {
     if (!fullPath || typeof fullPath !== 'string' || !fullPath[0] === '/') {
-      console.warn('fullPath格式不正确');
-      return null;
+      console.warn('fullPath格式不正确')
+      return null
     }
 
-    let path_arr = fullPath.split('/'); //["", "test", "test1", "test1-1"]
-    path_arr.shift(); //["test", "test1", "test1-1"]
-    path_arr.pop(); //["test", "test1"]
+    const path_arr = fullPath.split('/') // ["", "test", "test1", "test1-1"]
+    path_arr.shift() // ["test", "test1", "test1-1"]
+    path_arr.pop() // ["test", "test1"]
 
-    if (path_arr.length <= 0) return null;
+    if (path_arr.length <= 0) return null
 
     const parentRoute = path_arr.reduce((pre, cur, index) => {
-      const item = pre.find((i) => i.path === cur || i.path === '/' + cur);
+      const item = pre.find((i) => i.path === cur || i.path === '/' + cur)
 
       if (index < path_arr.length - 1) {
-        return item.children;
+        return item.children
       } else {
-        return item;
+        return item
       }
-    }, state.permission.routes);
+    }, state.permission.routes)
 
-    return parentRoute;
+    return parentRoute
   }
 }
 export default getters
