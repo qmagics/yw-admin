@@ -1,42 +1,73 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { getRoutes } from '@/api/menu'
+import { constantRoutes } from '@/router'
+import Layout from '@/layout/index'
+
+// /**
+//  * Use meta.role to determine if the current user has permission
+//  * @param roles
+//  * @param route
+//  */
+// function hasPermission(roles, route) {
+//   if (route.meta && route.meta.roles) {
+//     return roles.some(role => route.meta.roles.includes(role))
+//   } else {
+//     return true
+//   }
+// }
+
+// /**
+//  * Filter asynchronous routing tables by recursion
+//  * @param routes asyncRoutes
+//  * @param roles
+//  */
+// export function filterAsyncRoutes(routes, roles, parent) {
+//   const res = []
+
+//   routes.forEach(route => {
+//     const tmp = { ...route }
+
+//     if (hasPermission(roles, tmp)) {
+//       if (tmp.children) {
+//         tmp.children = filterAsyncRoutes(tmp.children, roles, tmp)
+//       }
+//       res.push(tmp)
+//     }
+//   })
+
+//   return res
+// }
 
 /**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
+ * 把通过api获取到的路由数据转化为VueRouter可识别的路由对象
+ * @param {*} asyncRoutesData 
  */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
+function parseRoutes(asyncRoutesData) {
+  return asyncRoutesData.map(i => {
+    const route = { ...i };
+
+    if (i.component) {
+      if (route.component === 'Layout') {
+        route.component = Layout;
+      }
+      else {
+        route.component = loadView(route.component);
+      }
+    }
+    if (route.children != null && route.children && route.children.length) {
+      route.children = parseRoutes(route.children)
+    }
+
+    return route;
+  })
 }
 
 /**
- * Filter asynchronous routing tables by recursion
- * @param routes asyncRoutes
- * @param roles
+ * 加载视图组件
+ * @param {*} path 视图组件路径
  */
-export function filterAsyncRoutes(routes, roles, parent) {
-  const res = []
-
-  routes.forEach(route => {
-    const tmp = { ...route }
-
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles, tmp)
-      }
-
-      // if(tmp.juhe){
-
-      // }
-      res.push(tmp)
-    }
-  })
-
-  return res
+function loadView(path) {
+  return (resolve) => require([`@/views/${path}`], resolve)
+  // return () => import(`@/views/${path}`);
 }
 
 const state = {
@@ -52,49 +83,23 @@ const mutations = {
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
-    return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
+  generateRoutes({ commit }) {
+    return new Promise((resolve) => {
+      getRoutes()
+        .then(res => {
+          //路由对象转化
+          const parsedRoutes = parseRoutes(res.data);
 
-      // console.log(accessedRoutes);
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+          //增加404页面路由(404页面路由必须放在路由数组的最后)
+          parsedRoutes.push({ path: '*', redirect: '/404', hidden: true });
+
+          //设置异步路由
+          commit('SET_ROUTES', parsedRoutes);
+
+          resolve(parsedRoutes);
+        })
     })
   }
-
-  // /**
-  //  * 根据完整路由地址获取父级路由对象
-  //  * @param {*} fullPath 子路由完整路径 "/test/test1/test1-1"
-  //  */
-  // getParentRouteByFullPath({ commit, state }, fullPath) {
-  //   if (!fullPath || typeof fullPath !== 'string' || !fullPath[0] === '/') {
-  //     console.warn('fullPath格式不正确');
-  //     return null;
-  //   }
-
-  //   let path_arr = fullPath.split('/'); //["", "test", "test1", "test1-1"]
-  //   path_arr.shift(); //["test", "test1", "test1-1"]
-  //   path_arr.pop(); //["test", "test1"]
-
-  //   if (path_arr.length <= 0) return null;
-
-  //   const parentRoute = path_arr.reduce((pre, cur, index) => {
-  //     const item = pre.find((i) => i.path === cur || i.path === '/' + cur);
-
-  //     if (index < path_arr.length - 1) {
-  //       return item.children;
-  //     } else {
-  //       return item;
-  //     }
-  //   }, state.routes);
-
-  //   return parentRoute;
-  // }
 }
 
 export default {
