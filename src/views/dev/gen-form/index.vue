@@ -1,5 +1,5 @@
 <template>
-  <div>Tools</div>
+  <div>gen-form</div>
 </template>
 
 <script>

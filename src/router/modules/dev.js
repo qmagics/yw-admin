@@ -18,20 +18,30 @@ const devRouter = {
             component: () => import('@/views/dev/gen-code'),
             meta: {
                 title: "代码生成",
-                icon: "el-icon-s-cooperation",
+                icon: "code",
                 noCache: false
             },
         },
         {
-            name: "Dev_Icons",
-            path: 'icons',
-            component: () => import('@/views/dev/icons'),
+            name: "Dev_IconLib",
+            path: 'icon-lib',
+            component: () => import('@/views/dev/icon-lib'),
             meta: {
                 title: '图标库',
                 icon: 'icon',
                 noCache: true
             }
-        }
+        },
+        {
+            name: "Dev_GenForm",
+            path: "gen-form",
+            component: () => import('@/views/dev/gen-form'),
+            meta: {
+                title: "表单生成",
+                icon: "el-icon-s-order",
+                noCache: false
+            },
+        },
     ]
 }
 
