@@ -10,6 +10,7 @@ Vue.use(Router);
 // import tableRouter from './modules/table'
 // import nestedRouter from './modules/nested'
 import devRouter from './modules/dev';
+import demoRouter from './modules/demo';
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -82,8 +83,10 @@ export const constantRoutes = [
       }
     ]
   },
-  
-  devRouter
+
+  devRouter,
+
+  demoRouter
 ]
 
 const createRouter = () => new Router({

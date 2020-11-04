@@ -29,12 +29,12 @@ const mutations = {
 }
 
 const actions = {
-  // user login
+  // 用户登录
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        console.log(response)
+        console.log('登录成功！',response);
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)

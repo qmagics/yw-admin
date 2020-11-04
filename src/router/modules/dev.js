@@ -13,16 +13,6 @@ const devRouter = {
 
     children: [
         {
-            name: "Dev_GenCode",
-            path: "gen-code",
-            component: () => import('@/views/dev/gen-code'),
-            meta: {
-                title: "代码生成",
-                icon: "code",
-                noCache: false
-            },
-        },
-        {
             name: "Dev_IconLib",
             path: 'icon-lib',
             component: () => import('@/views/dev/icon-lib'),
@@ -42,6 +32,16 @@ const devRouter = {
                 noCache: false
             },
         },
+        {
+            name: "Dev_GenCode",
+            path: "gen-code",
+            component: () => import('@/views/dev/gen-code'),
+            meta: {
+                title: "代码生成",
+                icon: "code",
+                noCache: false
+            },
+        }
     ]
 }
 
