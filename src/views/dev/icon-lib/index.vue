@@ -45,7 +45,7 @@ import svgIcons from './svg-icons'
 import elementIcons from './element-icons'
 
 export default {
-  name: 'Icons',
+  name: 'IconLib',
   data() {
     return {
       svgIcons,

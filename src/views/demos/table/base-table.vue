@@ -4,10 +4,9 @@
 
 <script>
 export default {
-
-}
+  name: "Demo_Table_BaseTable",
+};
 </script>
 
 <style>
-
 </style>

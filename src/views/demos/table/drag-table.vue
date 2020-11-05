@@ -66,7 +66,7 @@ import { fetchList } from '@/api/article'
 import Sortable from 'sortablejs'
 
 export default {
-  name: 'DragTable',
+  name: 'Demo_Table_DragTable',
   filters: {
     statusFilter(status) {
       const statusMap = {

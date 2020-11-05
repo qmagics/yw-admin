@@ -4,7 +4,6 @@ const demoRouter = {
     path: '/demo',
     component: Layout,
     redirect: 'noRedirect',
-    name: 'Demo',
     meta: {
         title: '开发样例',
         icon: 'el-icon-s-opportunity'
@@ -12,9 +11,9 @@ const demoRouter = {
     children: [
         {
             path: 'table',
-            name: 'Demo_Table',
             component: () => import('@/views/demos/table'),
             redirect: 'noRedirect',
+            name:'Demo_Table',
             meta: { title: 'Table', icon: 'table' },
             children: [
                 {

@@ -1,14 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Layout from '@/layout';
 
 Vue.use(Router);
 
 /* 路由模块 */
-// import componentsRouter from './modules/components'
-// import chartsRouter from './modules/charts'
-// import tableRouter from './modules/table'
-// import nestedRouter from './modules/nested'
+import commonRouters from './modules/common';
 import devRouter from './modules/dev';
 import demoRouter from './modules/demo';
 
@@ -38,65 +34,7 @@ import demoRouter from './modules/demo';
  * 没有权限要求，所有用户都可以访问
  */
 export const constantRoutes = [
-  {
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/common/redirect/index')
-      }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('@/views/common/login/index'),
-    hidden: true
-  },
-  {
-    path: '/profile',
-    component: Layout,
-    redirect: '/profile/index',
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/common/profile'),
-        name: 'Profile',
-        meta: { title: '用户信息', icon: 'user', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/auth-redirect',
-    component: () => import('@/views/common/login/auth-redirect'),
-    hidden: true
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/common/error-page/404'),
-    hidden: true
-  },
-  {
-    path: '/401',
-    component: () => import('@/views/common/error-page/401'),
-    hidden: true
-  },
-
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
+  ...commonRouters,
 
   devRouter,
 

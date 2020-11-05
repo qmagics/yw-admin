@@ -81,7 +81,7 @@
 import { fetchList } from '@/api/article'
 
 export default {
-  name: 'InlineEditTable',
+  name: 'Demo_Table_InlineEditTable',
   filters: {
     statusFilter(status) {
       const statusMap = {
