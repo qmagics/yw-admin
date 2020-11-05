@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import default_avatar from '@/assets/platform/avatar.png';
 
 const state = {
   token: getToken(),
@@ -34,7 +35,7 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        console.log('登录成功！',response);
+        console.log('登录成功！', response);
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -64,7 +65,7 @@ const actions = {
 
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', avatar || default_avatar)
         commit('SET_INTRODUCTION', introduction)
         resolve(data)
       }).catch(error => {

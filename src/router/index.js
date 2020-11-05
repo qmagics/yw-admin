@@ -55,6 +55,20 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/profile',
+    component: Layout,
+    redirect: '/profile/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/common/profile'),
+        name: 'Profile',
+        meta: { title: '用户信息', icon: 'user', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/auth-redirect',
     component: () => import('@/views/common/login/auth-redirect'),
     hidden: true
