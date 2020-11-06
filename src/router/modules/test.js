@@ -17,7 +17,7 @@ const testRouter = {
       path: 'test1',
       name: 'Test1',
       // 聚合路由使用这个layout
-      component: () => import('@/views/juhe'),
+      component: () => import('@/views/common/gather/index.vue'),
       redirect: '/test/test1/test1-1',
       meta: {
         title: '测试1',
@@ -28,7 +28,7 @@ const testRouter = {
         {
           path: 'test1-1',
           name: 'Test1-1',
-          component: () => import('@/views/test/test1/subs/test1-1'),
+          component: () => import('@/views/demos/test/test1/subs/test1-1'),
           hidden: true,
           meta: {
             title: '测试1-1',
@@ -40,7 +40,7 @@ const testRouter = {
         {
           path: 'test1-2',
           name: 'Test1-2',
-          component: () => import('@/views/test/test1/subs/test1-2'),
+          component: () => import('@/views/demos/test/test1/subs/test1-2'),
           hidden: true,
           meta: {
             title: '测试1-2',
@@ -54,7 +54,7 @@ const testRouter = {
     {
       path: 'test2',
       name: 'Test2',
-      component: () => import('@/views/test/test2'),
+      component: () => import('@/views/demos/test/test2'),
       redirect: '/test/test2/test2-1',
       meta: {
         title: '测试2'
@@ -63,7 +63,7 @@ const testRouter = {
         {
           path: 'test2-1',
           name: 'Test2-1',
-          component: () => import('@/views/test/test2/subs/test2-1'),
+          component: () => import('@/views/demos/test/test2/subs/test2-1'),
           meta: {
             title: '测试2-1'
           }
@@ -71,7 +71,7 @@ const testRouter = {
         {
           path: 'test2-2',
           name: 'Test2-2',
-          component: () => import('@/views/test/test2/subs/test2-2'),
+          component: () => import('@/views/demos/test/test2/subs/test2-2'),
           meta: {
             title: '测试2-2'
           }
@@ -80,14 +80,14 @@ const testRouter = {
     }
     // {
     //     path: 'test1',
-    //     // component: () => import('@/views/test/index.vue'),
-    //     component: () => import('@/views/test/subs/sub1.vue'),
+    //     // component: () => import('@/views/demos/test/index.vue'),
+    //     component: () => import('@/views/demos/test/subs/sub1.vue'),
     //     name: 'test1',
     //     meta: { title: 'Test1', noCache: true }
     // },
     // {
     //     path: 'test2',
-    //     component: () => import('@/views/test/subs/sub2.vue'),
+    //     component: () => import('@/views/demos/test/subs/sub2.vue'),
     //     name: 'test2',
     //     meta: { title: 'Test2', noCache: true }
     // },

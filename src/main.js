@@ -33,6 +33,12 @@ Object.keys(filters).forEach(key => {
 //关闭 Vue 的 productionTip
 Vue.config.productionTip = false;
 
+// // 生产环境下也使用mock (测试时使用)
+// if (process.env.NODE_ENV === 'production') {
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
+
 new Vue({
   el: '#app',
   router,

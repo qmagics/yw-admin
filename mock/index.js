@@ -1,10 +1,10 @@
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
-const user = require('./user')
-const role = require('./role')
-const article = require('./article')
-const search = require('./remote-search')
+const user = require('./demo/user')
+const role = require('./demo/role')
+const article = require('./demo/article')
+const search = require('./demo/remote-search')
 const menu = require('./menu')
 
 const mocks = [
