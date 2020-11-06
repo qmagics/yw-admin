@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { fetchList } from "@/api/article";
+import { fetchList } from "@/api/demo/article";
 
 export default {
   name: "ExportZip",
